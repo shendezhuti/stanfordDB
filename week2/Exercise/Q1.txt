@@ -3,7 +3,7 @@ View the RA Relational Algebra Syntax guide
 If you generate an error, you will see the message from the underlying SQLite system -- apologies for the lack of better error messages
 
 
-
 \project_{pizza}
 (\select_{age>20 and gender='female'} (Person \join Eats)
 ) ;
+
