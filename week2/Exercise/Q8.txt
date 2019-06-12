@@ -1,0 +1,21 @@
+Find all pizzerias that serve only pizzas eaten by people over 30.  (This query is quite challenging; congratulations if you get it right.) 
+
+Find all pizzerias that only serve pizzas eaten by people over 30?
+
+
+这个题有一点歧义？
+	
+			\project_{pizzeria}   (\select_{age>30}Person \join Eats); 
+
+
+stackoverflow 上的答案：
+
+\project_{pizzeria} Serves
+\diff
+\project_{pizzeria} (
+Serves
+\join
+((\project_{pizza} Serves)
+\diff
+(\project_{pizza}((\select_{age>'30'} Person) \join Eats)))
+)
