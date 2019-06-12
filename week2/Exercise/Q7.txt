@@ -1,0 +1,25 @@
+Find the age of the oldest person (or people) who eat mushroom pizza. (This query is quite challenging; congratulations if you get it right.) 
+
+第一次的答案：
+	\project_{age} (\select_{pizza='mushroom'} eats \join person);
+显然上面的答案是错误的，没有选出最大值
+
+看了discuss:Okay, i finally got it. You basically have to join on the ages with the argument age1>age2 and you get a long list where age2 always is smaller than age2 meaning the highest age is not included. Then you can just diff this from all ages and you get the maximum.
+
+尝试了一下：搞出了45这个最大值
+  \project_{age} person 
+  \diff 
+  \project_{age2}  \select_{age1>age2} ( \rename_{name,age1,gender}person \cross \rename_{name,age2,gender}person );
+  
+
+
+  (\project_{age} (\select_{pizza='mushroom'} eats \join person))
+
+  \diff
+
+  (\project_{age2}	\select_{age1>age2} ( \rename_{name,pizza,age1,gender} (\select_{pizza='mushroom'} eats \join person) 
+
+  			  \cross
+
+  			  \rename_{name,pizza,age2,gender} (\select_{pizza='mushroom'} eats \join person) ));
+	
