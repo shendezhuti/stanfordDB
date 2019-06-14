@@ -13,6 +13,7 @@ Find the age of the oldest person (or people) who eat mushroom pizza. (This quer
   
 
 
+最终结果
   (\project_{age} (\select_{pizza='mushroom'} eats \join person))
 
   \diff
