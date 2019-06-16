@@ -1,0 +1,19 @@
+Write a query to return the ratings data in a more readable format: reviewer name, movie title, stars, and ratingDate. Also, sort the data, first by reviewer name, then by movie title, and lastly by number of stars. 
+
+
+
+first attepmt:
+
+select  re.name,  m.title, r.stars,  r.ratingDate 
+from  reviewer re,movie m,rating r
+order by re.name , m.title, r.stars;
+
+
+
+这样不对啊，会出来几百条的记录
+
+
+select distinct re.name,  m.title, r.stars,  r.ratingDate 
+from  reviewer re,movie m,rating r
+where re.rID=r.rID and m.mID=r.mID
+order by re.name , m.title, r.stars;

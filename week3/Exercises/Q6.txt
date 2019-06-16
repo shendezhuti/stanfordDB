@@ -1,0 +1,15 @@
+For all cases where the same reviewer rated the same movie twice and gave it a higher rating the second time, return the reviewer's name and the title of the movie. 
+
+my first attempt ：
+select name,title
+
+太难了爆炸
+
+solution on stackoverflow:
+
+SELECT rev.name, m.title
+FROM Reviewer rev
+INNER JOIN Rating r1 on r1.rID = rev.rID
+INNER JOIN Rating r2 on r2.rID = rev.rID and r2.mID = r1.mID
+INNER JOIN Movie m on m.mID = r1.mID
+WHERE r2.ratingDate > r1.ratingDate and r2.stars > r1.stars 

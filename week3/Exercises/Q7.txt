@@ -1,0 +1,8 @@
+For each movie that has at least one rating, find the highest number of stars that movie received. Return the movie title and number of stars. Sort by movie title. 
+
+my answer:
+select title ,stars 
+from movie m,rating r1
+where stars in (select max(stars) from rating r2 where m.mID=r2.mID group by mID);
+
+第一次就做对了，小激动
