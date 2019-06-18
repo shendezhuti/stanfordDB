@@ -1,0 +1,17 @@
+Find the name and grade of the student(s) with the greatest number of friends. 
+
+
+solution on github:
+SELECT friendCount_Table.name, friendCount_Table.grade
+FROM
+( SELECT H1.ID, H1.name,H1.grade, COUNT(DISTINCT H2.ID) AS friendCount
+FROM Highschooler H1, Friend, Highschooler H2
+WHERE H1.ID = Friend.ID1 AND Friend.ID2 = H2.ID
+GROUP BY H1.ID ) AS friendCount_Table
+WHERE friendCount = (
+    SELECT MAX(friendCount)
+    FROM ( SELECT H1.ID, H1.grade, COUNT(DISTINCT H2.ID) AS friendCount
+        FROM Highschooler H1, Friend, Highschooler H2
+        WHERE H1.ID = Friend.ID1 AND Friend.ID2 = H2.ID
+        GROUP BY H1.ID )
+) 
