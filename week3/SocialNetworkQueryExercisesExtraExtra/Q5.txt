@@ -1,0 +1,6 @@
+For every situation where student A likes student B, but we have no information about whom B likes (that is, B does not appear as an ID1 in the Likes table), return A and B's names and grades. 
+
+
+SELECT DISTINCT H1.name, H1.grade, H2.name, H2.grade
+from HighSchooler H1, HighSchooler H2, Like L
+where H1.ID=L.ID1 and H2.ID=L.ID2 and H2.ID  not in (select distinct ID1 from Likes);
