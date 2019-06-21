@@ -8,6 +8,7 @@ order by rating spread,title;
 
 
 solution on stackoverflow:
+
 SELECT Movie.title,  max(Rating.stars)-min(Rating.stars) as spread
 FROM Movie, Rating
 WHERE Movie.mID = Rating.mID
