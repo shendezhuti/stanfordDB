@@ -1,0 +1,14 @@
+Find the names of all reviewers who rated Gone with the Wind. 
+
+
+
+select distinct rev.name 
+from  Reviewer rev,Movie m ,Rating r
+where rev.rID=r.rID and m.mID=r.mID  and m.title='gone with the Wind';
+
+上面的代码可以在mysql中检测出来，但是在SQLite就不行，奇怪啊
+
+solution on github 
+SELECT DISTINCT Reviewer.name
+FROM (Movie JOIN Rating USING(mID)) JOIN Reviewer USING(rID)
+WHERE Movie.title = 'Gone with the Wind'

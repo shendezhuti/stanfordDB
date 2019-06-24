@@ -1,0 +1,19 @@
+Find the names of all people who eat at least one pizza served by Dominos but who do not frequent Dominos. 
+
+
+下面是第一次的思路，有一个问题就是，下面这个方法不能解决某个人同时去 Dominos 和其他一个地方
+	\project_{name} \select_{pizzeria2!='Dominos'} (\rename_{name,pizzeria2} Frequents \join (\select_{pizzeria1='Dominos'} \rename_{pizzeria1,pizza,price} Serves ) \join Eats);
+
+
+
+论坛上有人提到用 diff就能解决
+	
+	\project_{name} (\select_{pizzeria1='Dominos'} \rename_{pizzeria1,pizza,price} Serves \join Eats)
+
+	\diff
+
+	\project_{name} (\select_{pizzeria2='Dominos'} \rename_{name,pizzeria2} Frequents) 
+	
+	;
+
+

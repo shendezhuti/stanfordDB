@@ -1,0 +1,11 @@
+For every situation where student A likes student B, but student B likes a different student C, return the names and grades of A, B, and C. 
+
+
+
+稍微思考了一下，应该要用三个relation 直接看了答案：
+SELECT HA.name, HA.grade, HB.name, HB.grade, HC.name, HC.grade
+FROM Highschooler HA, Likes LikesAB, Highschooler HB, Likes LikesBC, Highschooler HC
+WHERE HA.ID = LikesAB.ID1 AND LikesAB.ID2 = HB.ID
+AND HB.ID = LikesBC.ID1 AND LikesBC.ID2 = HC.ID
+AND HA.ID <> HC.ID
+

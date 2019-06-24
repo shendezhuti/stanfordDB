@@ -1,0 +1,16 @@
+For each movie, return the title and the 'rating spread', that is, the difference between highest and lowest ratings given to that movie. Sort by rating spread from highest to lowest, then by movie title. 
+
+my first attempt:
+select m.title,  max(mx-mn) as rating spread
+from (select title, max(stars)as mx, min(stars)as mn from rating r, movie m 
+where r.mID=m.mID)
+order by rating spread,title;
+
+
+solution on stackoverflow:
+
+SELECT Movie.title,  max(Rating.stars)-min(Rating.stars) as spread
+FROM Movie, Rating
+WHERE Movie.mID = Rating.mID
+GROUP BY Rating.mID
+ORDER BY spread DESC, Movie.title ASC

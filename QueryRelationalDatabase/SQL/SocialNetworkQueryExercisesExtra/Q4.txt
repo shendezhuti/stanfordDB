@@ -1,0 +1,16 @@
+Find the number of students who are either friends with Cassandra or are friends of friends of Cassandra. Do not count Cassandra, even though technically she is a friend of a friend. 
+
+
+SELECT nbFriend + nbFriendofFriend
+FROM
+(
+SELECT COUNT(DISTINCT H2.ID) AS nbFriend
+FROM Highschooler H1, Friend, Highschooler H2
+WHERE H1.ID = Friend.ID1 AND Friend.ID2 = H2.ID
+AND H1.name = 'Cassandra' ),
+(
+SELECT COUNT(DISTINCT H3.ID) AS nbFriendofFriend
+FROM Highschooler H1, Friend Friend1_2, Highschooler H2, Friend Friend2_3, Highschooler H3
+WHERE H1.ID = Friend1_2.ID1 AND Friend1_2.ID2 = H2.ID
+AND H2.ID = Friend2_3.ID1 AND Friend2_3.ID2 = H3.ID
+AND H1.name = 'Cassandra' AND H3.name <> 'Cassandra' )

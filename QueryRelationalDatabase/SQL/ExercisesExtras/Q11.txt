@@ -1,0 +1,20 @@
+Find the movie(s) with the lowest average rating. Return the movie title(s) and average rating. (Hint: This query may be more difficult to write in SQLite than other systems; you might think of it as finding the lowest average rating and then choosing the movie(s) with that average rating.) 
+
+
+SELECT DISTINCT title, avgstars
+FROM
+(
+SELECT DISTINCT title, AVG(stars) AS avgstars
+FROM Movie JOIN (Rating JOIN Reviewer USING(rID)) USING(mID)
+GROUP BY title
+)
+WHERE avgstars IN
+(
+SELECT DISTINCT MIN(avgstars)
+FROM
+(
+SELECT DISTINCT title, AVG(stars) AS avgstars
+FROM Movie JOIN (Rating JOIN Reviewer USING(rID)) USING(mID)
+GROUP BY title
+)
+)

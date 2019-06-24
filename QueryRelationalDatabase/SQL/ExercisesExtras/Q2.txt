@@ -1,0 +1,14 @@
+For any rating where the reviewer is the same as the director of the movie, return the reviewer name, movie title, and number of stars. 
+
+my first attempt:
+
+select rev.name,m.title, count(r.stars)
+from raing r, reviewer rev,movie m
+where rev.rID=r.rID and m.director=rev.name
+group by r.mID
+
+solution on github:
+
+SELECT DISTINCT Reviewer.name, Movie.title, Rating.stars
+FROM (Movie JOIN Rating USING(mID)) JOIN Reviewer USING(rID)
+WHERE Movie.director = Reviewer.name

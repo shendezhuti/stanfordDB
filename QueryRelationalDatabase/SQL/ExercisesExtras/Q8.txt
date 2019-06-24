@@ -1,0 +1,16 @@
+
+Find the names of all reviewers who have contributed three or more ratings. (As an extra challenge, try writing the query without HAVING or without COUNT.) 
+
+my attempt:
+SELECT DISTINCT name
+FROM Movie JOIN (Rating JOIN Reviewer USING(rID)) USING(mID)
+where count(rID) >3
+group by rID;
+
+
+solution on github:
+
+SELECT DISTINCT name
+FROM Movie JOIN (Rating JOIN Reviewer USING(rID)) USING(mID)
+GROUP BY name
+HAVING COUNT(stars) >= 3

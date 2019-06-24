@@ -1,0 +1,16 @@
+Some reviewers didn't provide a date with their rating. Find the names of all reviewers who have ratings with a NULL value for the date. 
+
+
+
+my solution first time:
+select re.name 
+from reviewer re
+where not exists (select * from rating r where r.ratingDate =NULL)
+
+又是错误的，尴尬
+
+second attampt:
+
+select name 
+from reviewer  re
+ where re.rID  in (select r.rID from rating r where r.ratingDate is NULL);

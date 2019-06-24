@@ -1,0 +1,20 @@
+Find all pizzerias that serve every pizza eaten by people over 30. 
+(This query is very challenging; extra congratulations if you get it right.) 
+
+		
+	
+	my solution:
+	\project_{pizza}(\select_{age>30} person \join eats);
+
+
+	stackoverflow:
+
+\project_{pizzeria}(Serves)
+	\diff
+	\project_{pizzeria}(
+    (\project_{pizzeria}(Serves) 
+    \cross 
+    \project_{pizza}(\project_{name}(\select_{age>30}(Person))\join Eats))
+    \diff
+    \project_{pizzeria,pizza}(Serves)
+	)

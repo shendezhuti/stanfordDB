@@ -1,0 +1,22 @@
+Find the titles of all movies not reviewed by Chris Jackson. 
+
+
+my first attempt:
+select distinct title 
+from movie join rating using (mID)  join reviewer using (rID)
+where name  <> 'Chris Jackson';
+
+为什么不行呢？？我感觉应该可以啊
+
+solution on github:
+SELECT title
+FROM MOVIE
+WHERE mID IN
+(
+SELECT DISTINCT mID
+FROM Movie
+EXCEPT
+SELECT DISTINCT mID
+FROM Rating JOIN Reviewer USING(rID)
+WHERE Reviewer.name = 'Chris Jackson'
+)

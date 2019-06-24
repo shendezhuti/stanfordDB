@@ -1,0 +1,43 @@
+Find the difference between the average rating of movies released before 1980 and the average rating of movies released after 1980. (Make sure to calculate the average rating for each movie, then the average of those averages for movies before 1980 and movies after. Don't just calculate the overall average rating before and after 1980.) 
+
+my first attempt:
+select (select mID,avg(stars)
+from rating r,movie m
+where r.mID=m.mID  
+group by stars );
+
+
+solution on stackoverflow:
+
+select pre80s.avgRating - post80s.avgRating
+from 
+(
+    select avg(indAvg) as avgRating
+    from 
+    (
+        select avg(stars) as indAvg
+        from Rating
+        where mID in
+            (
+                select mID
+                from Movie
+                where year <= 1980
+            )
+        group by mID
+    )
+) as pre80s,
+(
+    select avg(indAvg) as avgRating
+    from 
+    (
+        select avg(stars) as indAvg
+        from Rating
+        where mID not in
+            (
+                select mID
+                from Movie
+                where year <= 1980
+            )
+        group by mID
+    )
+) as post80s;
