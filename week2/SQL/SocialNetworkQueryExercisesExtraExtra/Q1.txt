@@ -1,6 +1,0 @@
-Find the names of all students who are friends with someone named Gabriel. 
-
-
-select from h2.name
-from Highschooler h1, Highschooler h2
-where h1.ID=h2.ID and h1.name='Gabriel';

@@ -1,7 +1,0 @@
-List movie titles and average ratings, from highest-rated to lowest-rated. If two or more movies have the same average rating, list them in alphabetical order. 
-
-
-SELECT DISTINCT title, AVG(stars) AS avgstars
-FROM Movie JOIN (Rating JOIN Reviewer USING(rID)) USING(mID)
-GROUP BY title
-ORDER BY avgstars DESC, title;

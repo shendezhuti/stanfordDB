@@ -1,9 +1,0 @@
-Find those students for whom all of their friends are in different grades from themselves. Return the students' names and grades. 
-
-SELECT DISTINCT H.name, H.grade
-FROM Highschooler H
-
-SELECT DISTINCT H1.name, H1.grade
-FROM Highschooler H1, Friend, Highschooler H2
-WHERE H1.ID = Friend.ID1 AND Friend.ID2 = H2.ID
-AND H1.grade = H2.grade

@@ -1,7 +1,0 @@
-Find all years that have a movie that received a rating of 4 or 5, and sort them in increasing order. 
-
-
-select distinct year 
- from movie m,rating r
- where m.mID=r.mId and (r.stars=4 or r.stars=5 )
- order by year ;
